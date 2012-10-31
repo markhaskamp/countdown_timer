@@ -19,7 +19,7 @@ end
 days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dev"]
 time_now = Time.now
-time_msg = sprintf("%s. %s %d. %02d:%02d", 
+time_msg = sprintf("%s,  %s %d,  %02d:%02d", 
                     days[time_now.wday],
                     months[time_now.mon-1], 
                     time_now.mday, 
