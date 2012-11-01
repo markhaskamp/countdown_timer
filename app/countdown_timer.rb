@@ -1,14 +1,14 @@
 #!/Users/mark/.rvm/rubies/ruby-1.9.2-head/bin/ruby
 
 class Seconds
-  def continue_countdown? duration, elapsed_seconds
-    return elapsed_seconds < duration
+  def continue_countdown? requested_duration, elapsed_seconds
+    return elapsed_seconds < requested_duration
   end
 end
 
 class Minutes
-  def continue_countdown? duration, elapsed_seconds
-    return (duration*60) > elapsed_seconds
+  def continue_countdown? requested_duration, elapsed_seconds
+    return (requested_duration*60) > elapsed_seconds
   end
 end
 
@@ -33,14 +33,14 @@ class CountdownTimer
   end
 
   def main
-    duration = get_duration(ARGV)
+    requested_duration = get_duration(ARGV)
     duration_type = get_duration_type(ARGV)
     
     time_start = Time.now()
     time_end = Time.now()
     elapsed_count = (time_end - time_start).to_i
     
-    while duration_type.continue_countdown?(duration, elapsed_count) do
+    while duration_type.continue_countdown?(requested_duration, elapsed_count) do
       sleep 1
       time_end = Time.now()
       elapsed_count = (time_end - time_start).to_i
@@ -55,7 +55,7 @@ class CountdownTimer
                         time_now.mday, 
                         time_now.hour, 
                         time_now.min)
-    message = "#{duration} seconds"
+    message = "#{requested_duration} seconds"
     `~/bin/terminal-notifier/terminal-notifier_1.4.2/terminal-notifier.app/Contents/MacOS/terminal-notifier -message "#{message}\n#{time_msg}" -title "Time's up"`
   end
 end
