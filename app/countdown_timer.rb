@@ -4,11 +4,22 @@ class Seconds
   def continue_countdown? requested_duration, elapsed_seconds
     return elapsed_seconds < requested_duration
   end
+
+  def describe_duration requested_duration
+    return "#{requested_duration} second" if requested_duration == 1
+
+    return "#{requested_duration} seconds"
+  end
 end
 
 class Minutes
   def continue_countdown? requested_duration, elapsed_seconds
     return (requested_duration*60) > elapsed_seconds
+  end
+  def describe_duration requested_duration
+    return "#{requested_duration} minute" if requested_duration == 1
+
+    return "#{requested_duration} minutes"
   end
 end
 
