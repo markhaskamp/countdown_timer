@@ -1,9 +1,15 @@
 #!/Users/mark/.rvm/rubies/ruby-1.9.2-head/bin/ruby
 
 class Seconds
+  def continue_countdown? duration, elapsed_time
+    return elapsed_time < duration
+  end
 end
 
 class Minutes
+  def continue_countdown? duration, elapsed_time
+    return false
+  end
 end
 
 class CountdownTimer
@@ -17,22 +23,24 @@ class CountdownTimer
     return 0
   end
 
-  def get_duration_type s
-    return Seconds.new if s.match('^[sS]')
-    return Minutes.new if s.match('^[mM]')
+  def get_duration_type array_in
+    array_in.each do |arg|
+      return Seconds.new if arg.to_s.match('^[sS]')
+      return Minutes.new if arg.to_s.match('^[mM]')
+    end
 
     return Minutes.new
   end
 
   def main
-    duration = ARGV[0].to_i
-    type = ARGV[1]
+    duration = get_duration(ARGV)
+    duration_type = get_duration_type(ARGV)
     
     time_start = Time.now()
     time_end = Time.now()
     elapsed_count = (time_end - time_start).to_i
     
-    while elapsed_count < duration do
+    while duration_type.continue_countdown?(duration, elapsed_count) do
       sleep 1
       time_end = Time.now()
       elapsed_count = (time_end - time_start).to_i

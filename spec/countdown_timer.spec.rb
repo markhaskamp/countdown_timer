@@ -44,18 +44,36 @@ describe "#get_duration_type" do
   end
 
   it "input string starts with 's' or 'S' then returns Seconds" do
-    ct.get_duration_type("seconds").should be_a_kind_of(Seconds)
+    ct.get_duration_type(["seconds"]).should be_a_kind_of(Seconds)
+    ct.get_duration_type([42,"seconds"]).should be_a_kind_of(Seconds)
 
-    ct.get_duration_type("skiddoo").should be_a_kind_of(Seconds)
+    ct.get_duration_type(["skiddoo"]).should be_a_kind_of(Seconds)
 
-    ct.get_duration_type("Skiddoo").should be_a_kind_of(Seconds)
+    ct.get_duration_type(["Skiddoo"]).should be_a_kind_of(Seconds)
   end
 
   it "input string starts with 'm' or 'M' then returns Minutes" do
-    ct.get_duration_type("minutes").should be_a_kind_of(Minutes)
+    ct.get_duration_type(["minutes"]).should be_a_kind_of(Minutes)
   end
 
   it "returns Minutes by default" do
-    ct.get_duration_type("").should be_a_kind_of(Minutes)
+    ct.get_duration_type([""]).should be_a_kind_of(Minutes)
   end
 end
+
+describe Seconds do
+  describe "#continue_countdown?" do
+    sec = Seconds.new
+
+    it "returns true when elapsed_time < duration" do
+      sec.continue_countdown?(15, 10).should be_true
+    end
+    it "returns false when elapsed_time = duration" do
+      sec.continue_countdown?(15, 15).should be_false
+    end
+    it "returns false when elapsed_time > duration" do
+      sec.continue_countdown?(15, 17).should be_false
+    end
+  end
+end
+
