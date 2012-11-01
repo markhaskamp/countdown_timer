@@ -1,14 +1,14 @@
 #!/Users/mark/.rvm/rubies/ruby-1.9.2-head/bin/ruby
 
 class Seconds
-  def continue_countdown? duration, elapsed_time
-    return elapsed_time < duration
+  def continue_countdown? duration, elapsed_seconds
+    return elapsed_seconds < duration
   end
 end
 
 class Minutes
-  def continue_countdown? duration, elapsed_time
-    return false
+  def continue_countdown? duration, elapsed_seconds
+    return (duration*60) > elapsed_seconds
   end
 end
 

@@ -77,3 +77,19 @@ describe Seconds do
   end
 end
 
+describe Minutes do
+  describe "#continue_countdown?" do
+    sec = Minutes.new
+
+    it "returns true when elapsed_time < duration" do
+      sec.continue_countdown?(5, 299).should be_true
+    end
+    # it "returns false when elapsed_time = duration" do
+    #   sec.continue_countdown?(5, 15).should be_false
+    # end
+    # it "returns false when elapsed_time > duration" do
+    #   sec.continue_countdown?(5, 17).should be_false
+    # end
+  end
+end
+
