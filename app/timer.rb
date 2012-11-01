@@ -1,8 +1,5 @@
 #!/Users/mark/.rvm/rubies/ruby-1.9.2-head/bin/ruby
 
-# get duration, duration-type from command line
-#   e.g. 5 minutes, or 30 seconds, or 1 hour
-
 duration = ARGV[0].to_i
 type = ARGV[1]
 
