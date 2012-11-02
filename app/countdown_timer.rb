@@ -4,8 +4,10 @@ require File.dirname(__FILE__) + '/CountdownTimer.rb'
 
 ct = CountdownTimer.new
 
-requested_duration = ct.get_duration(ARGV)
-duration_type = ct.get_duration_type(ARGV)
+input_args = ct.flatten_input_array ARGV
+puts "input_args: #{input_args}"
+requested_duration = ct.get_duration(input_args)
+duration_type = ct.get_duration_type(input_args)
 
 time_start = Time.now()
 time_end = Time.now()

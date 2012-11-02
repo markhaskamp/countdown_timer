@@ -36,6 +36,19 @@ class Composite
 end
 
 class CountdownTimer
+  def flatten_input_array s
+
+    if s.instance_of? Array then
+      return_args = []
+      s.each do |foo|
+        return_args.push foo.split
+      end
+      return return_args.flatten!
+    end
+
+    return s.split
+  end
+
   def get_duration array_in
     return array_in[0] if array_in.length == 1 && array_in[0].match(':')
 

@@ -2,6 +2,23 @@ require 'rspec'
 require File.dirname(__FILE__) + '/../app/CountdownTimer.rb'
 
 
+describe "#flatten_input_args" do
+  it "'3 m' returns [3,m]" do
+    ct = CountdownTimer.new
+    ct.flatten_input_array('3 m').should == ["3", 'm']
+  end
+
+  it "['3', m'] returns [3,m]" do
+    ct = CountdownTimer.new
+    ct.flatten_input_array(['3', 'm']).should == ["3", 'm']
+  end
+
+  it "['3 m'] returns [3,m]" do
+    ct = CountdownTimer.new
+    ct.flatten_input_array(['3 m']).should == ["3", 'm']
+  end
+end
+
 describe "#get_duration" do
   ct = nil
 
