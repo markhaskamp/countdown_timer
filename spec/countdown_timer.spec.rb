@@ -1,5 +1,5 @@
 require 'rspec'
-require File.dirname(__FILE__) + '/../app/countdown_timer.rb'
+require File.dirname(__FILE__) + '/../app/CountdownTimer.rb'
 
 
 describe "#get_duration" do
