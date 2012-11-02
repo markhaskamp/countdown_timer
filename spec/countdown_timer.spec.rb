@@ -123,3 +123,26 @@ describe Minutes do
   end
 end
 
+describe Composite do
+  describe "#continue_countdown?" do
+    comp = Composite.new
+
+    it "returns true when elapsed_time < duration" do
+      comp.continue_countdown?("1:30", 60).should be_true
+    end
+    it "returns false when elapsed_time = duration" do
+      comp.continue_countdown?("0:30", 30).should be_false
+    end
+    it "returns false when elapsed_time > duration" do
+      comp.continue_countdown?("2:30", 400).should be_false
+    end
+  end
+
+  describe "#describe_duration" do
+    comp = Composite.new
+    it "returns time description" do
+      comp.describe_duration('0:30').should == '0:30'
+    end
+  end
+end
+
