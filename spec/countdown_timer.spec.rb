@@ -46,14 +46,18 @@ describe "#get_duration_type" do
   it "input string starts with 's' or 'S' then returns Seconds" do
     ct.get_duration_type(["seconds"]).should be_a_kind_of(Seconds)
     ct.get_duration_type([42,"seconds"]).should be_a_kind_of(Seconds)
-
     ct.get_duration_type(["skiddoo"]).should be_a_kind_of(Seconds)
-
     ct.get_duration_type(["Skiddoo"]).should be_a_kind_of(Seconds)
   end
 
   it "input string starts with 'm' or 'M' then returns Minutes" do
     ct.get_duration_type(["minutes"]).should be_a_kind_of(Minutes)
+  end
+
+  it "input string starts contains a '[digit]:[digit]' then returns Composite" do
+    ct.get_duration_type(["1:30"]).should be_a_kind_of(Composite)
+
+    ct.get_duration_type(["x:30"]).should be_a_kind_of(Minutes)
   end
 
   it "returns Minutes by default" do

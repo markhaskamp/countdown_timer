@@ -23,6 +23,17 @@ class Minutes
   end
 end
 
+class Composite
+  # def continue_countdown? requested_duration, elapsed_seconds
+  #   return elapsed_seconds < requested_duration
+  # end
+
+  # def describe_duration requested_duration
+  #   return "#{requested_duration} second" if requested_duration == 1
+
+  #   return "#{requested_duration} seconds"
+  # end
+end
 class CountdownTimer
   def get_duration array_in
     array_in.each do |arg|
@@ -38,6 +49,7 @@ class CountdownTimer
     array_in.each do |arg|
       return Seconds.new if arg.to_s.match('^[sS]')
       return Minutes.new if arg.to_s.match('^[mM]')
+      return Composite.new if arg.to_s.match('\d+:\d+')
     end
 
     return Minutes.new
@@ -66,7 +78,7 @@ class CountdownTimer
                         time_now.mday, 
                         time_now.hour, 
                         time_now.min)
-    message = "#{requested_duration} seconds"
+    message = "#{duration_type.describe_duration(requested_duration)}"
     `~/bin/terminal-notifier/terminal-notifier_1.4.2/terminal-notifier.app/Contents/MacOS/terminal-notifier -message "#{message}\n#{time_msg}" -title "Time's up"`
   end
 end
