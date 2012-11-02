@@ -35,6 +35,16 @@ class Composite
   end
 end
 
+class Unknown
+  def continue_countdown? requested_duration, elapsed_seconds
+    return false
+  end
+
+  def describe_duration requested_duration
+    return "Don't understand '#{requested_duration}'"
+  end
+end
+
 class CountdownTimer
   def flatten_input_array s
 
@@ -69,7 +79,7 @@ class CountdownTimer
       return Composite.new if arg.to_s.match('\d+:\d+')
     end
 
-    return Minutes.new
+    return Unknown.new
   end
 end
 

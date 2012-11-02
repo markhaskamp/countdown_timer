@@ -5,7 +5,6 @@ require File.dirname(__FILE__) + '/CountdownTimer.rb'
 ct = CountdownTimer.new
 
 input_args = ct.flatten_input_array ARGV
-puts "input_args: #{input_args}"
 requested_duration = ct.get_duration(input_args)
 duration_type = ct.get_duration_type(input_args)
 
@@ -28,6 +27,9 @@ time_msg = sprintf("%s,  %s %d,  %02d:%02d",
                     time_now.mday, 
                     time_now.hour, 
                     time_now.min)
+
+
 message = "#{duration_type.describe_duration(requested_duration)}"
+message = "#{duration_type.describe_duration(ARGV)}" if duration_type.instance_of? Unknown
 `~/bin/terminal-notifier/terminal-notifier_1.4.2/terminal-notifier.app/Contents/MacOS/terminal-notifier -message "#{message}\n#{time_msg}" -title "Time's up"`
 

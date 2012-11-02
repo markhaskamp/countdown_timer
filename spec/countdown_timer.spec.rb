@@ -74,11 +74,11 @@ describe "#get_duration_type" do
   it "input string starts contains a '[digit]:[digit]' then returns Composite" do
     ct.get_duration_type(["1:30"]).should be_a_kind_of(Composite)
 
-    ct.get_duration_type(["x:30"]).should be_a_kind_of(Minutes)
+    ct.get_duration_type(["x:30"]).should be_a_kind_of(Unknown)
   end
 
-  it "returns Minutes by default" do
-    ct.get_duration_type([""]).should be_a_kind_of(Minutes)
+  it "returns Uknown by default" do
+    ct.get_duration_type(["z"]).should be_a_kind_of(Unknown)
   end
 end
 
@@ -163,3 +163,19 @@ describe Composite do
   end
 end
 
+describe Unknown do
+  describe "#continue_countdown?" do
+    unk = Unknown.new
+
+    it "returns false" do
+      unk.continue_countdown?(15, 10).should be_false
+    end
+  end
+
+  describe "#describe_duration" do
+    unk = Unknown.new
+    it "displays don't understand -input args-" do
+      unk.describe_duration("foo").should == "Don't understand 'foo'"
+    end
+  end
+end
