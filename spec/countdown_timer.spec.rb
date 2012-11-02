@@ -101,12 +101,12 @@ describe Minutes do
     it "returns true when elapsed_time < duration" do
       sec.continue_countdown?(5, 299).should be_true
     end
-    # it "returns false when elapsed_time = duration" do
-    #   sec.continue_countdown?(5, 15).should be_false
-    # end
-    # it "returns false when elapsed_time > duration" do
-    #   sec.continue_countdown?(5, 17).should be_false
-    # end
+    it "returns false when elapsed_time = duration" do
+      sec.continue_countdown?(5, 300).should be_false
+    end
+    it "returns false when elapsed_time > duration" do
+      sec.continue_countdown?(5, 400).should be_false
+    end
   end
 
   describe "#describe_duration" do
@@ -114,12 +114,12 @@ describe Minutes do
     it "when minutes are more than 1 then returns 'n minutes'" do
       min.describe_duration(2).should == "2 minutes" 
     end
-    # it "when seconds are equal to 1 then returns '1 second'" do
-    #   sec.describe_duration(1).should == "1 second" 
-    # end
-    # it "when seconds are equal to 0 then returns '0 seconds'" do
-    #   sec.describe_duration(0).should == "0 seconds" 
-    # end
+    it "when minutes are equal to 1 then returns '1 minute'" do
+      min.describe_duration(1).should == "1 minute" 
+    end
+    it "when minutes are equal to 0 then returns '0 minutes'" do
+      min.describe_duration(0).should == "0 minutes" 
+    end
   end
 end
 
