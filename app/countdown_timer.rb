@@ -1,7 +1,6 @@
 #!/Users/mark/.rvm/rubies/ruby-1.9.2-head/bin/ruby
 require File.dirname(__FILE__) + '/CountdownTimer.rb'
 
-
 ct = CountdownTimer.new
 
 days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
