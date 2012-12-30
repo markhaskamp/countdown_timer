@@ -1,5 +1,42 @@
 #!/Users/mark/.rvm/rubies/ruby-1.9.2-head/bin/ruby
 require File.dirname(__FILE__) + '/CountdownTimer.rb'
+require 'optparse'
+
+def help_message
+
+  return <<EOH
+Usage:
+
+  countdown_timer -h      display this screen
+  countdown_timer --help   "   "    "    "
+
+  countdown_timer mm:ss
+  or countdown_timer [amount] m[inutes]
+  or countdown_timer [amount] s[econds]
+
+Examples:
+  countdown_timer 5:00
+  countdown_timer 3 minutes
+  countdown_timer 3 m
+  countdown_timer 30 seconds
+  countdown_timer 30 s
+EOH
+end
+
+options = {}
+option_parser = OptionParser.new do |opts|
+  opts.on("-h", "--help") do
+    puts help_message
+    exit(0)
+  end
+end
+option_parser.parse!
+
+
+if ARGV.length == 0 then
+  puts help_message
+  exit(0)
+end
 
 ct = CountdownTimer.new
 
